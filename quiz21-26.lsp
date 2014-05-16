@@ -32,17 +32,18 @@
   (if (eq elem (car lst))
 	(cdr lst)
 	(after-elem elem (cdr lst))))
-(defun attach-elem (lst1 lst2)
-  (let ((remain-elem (after-elem (car (reverse lst1)) lst2)))
-	(if (null lst1)
-	  (cn1 lst2)
-	  (attach-elem-aux lst1 remain-elem nil))))
 
 (defun attach-elem-aux (lst remain res)
   (labels ((add-tail (elem lst) (reverse (cons elem (reverse lst)))))
 	(if (null remain)
 	  (reverse res)
 	  (attach-elem-aux lst (cdr remain) (cons (add-tail (car remain) lst) res)))))
+(defun attach-elem (lst1 lst2)
+  (let ((remain-elem (after-elem (car (reverse lst1)) lst2)))
+	(if (null lst1)
+	  (cn1 lst2)
+	  (attach-elem-aux lst1 remain-elem nil))))
+
 
 (defun attach-list (lst1 lst2)
   (if (null lst1)
